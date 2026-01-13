@@ -364,7 +364,7 @@ export default function Home() {
               <Card className="bg-card/50 border-border/50 backdrop-blur hover:border-primary/50 transition-all duration-300 overflow-hidden group">
                 <div className="aspect-video w-full overflow-hidden">
                   <img 
-                    src="/images/reviews/review2.png" 
+                    src="/images/reviews/bmw_v2.png" 
                     alt="フロント・リアスポイラー装着" 
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
