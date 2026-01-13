@@ -107,6 +107,42 @@ export default function Home() {
               </Button>
             </div>
           </div>
+
+          {/* Endless Slideshow */}
+          <div className="absolute bottom-0 left-0 right-0 bg-black/80 backdrop-blur-sm border-t border-primary/20 py-4 overflow-hidden z-20">
+            <div className="flex animate-scroll hover:pause-on-hover w-[200%]">
+              {/* First set of images */}
+              <div className="flex gap-4 px-2 min-w-[50%] justify-around">
+                {productsData.map((product, index) => (
+                  <div key={`slide-1-${index}`} className="relative w-32 h-20 md:w-48 md:h-28 flex-shrink-0 rounded-md overflow-hidden border border-border/50 group cursor-pointer hover:border-primary transition-colors">
+                    <img 
+                      src={product.image} 
+                      alt={product.name} 
+                      className="w-full h-full object-cover opacity-70 group-hover:opacity-100 transition-opacity duration-300"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end justify-center p-2">
+                      <span className="text-xs text-white font-bold truncate w-full text-center">{product.name}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              {/* Duplicate set for seamless loop */}
+              <div className="flex gap-4 px-2 min-w-[50%] justify-around">
+                {productsData.map((product, index) => (
+                  <div key={`slide-2-${index}`} className="relative w-32 h-20 md:w-48 md:h-28 flex-shrink-0 rounded-md overflow-hidden border border-border/50 group cursor-pointer hover:border-primary transition-colors">
+                    <img 
+                      src={product.image} 
+                      alt={product.name} 
+                      className="w-full h-full object-cover opacity-70 group-hover:opacity-100 transition-opacity duration-300"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end justify-center p-2">
+                      <span className="text-xs text-white font-bold truncate w-full text-center">{product.name}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
         </section>
 
         {/* Problem Solution Section */}
