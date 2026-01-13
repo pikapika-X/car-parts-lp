@@ -1,13 +1,24 @@
+import { useAuth } from "@/_core/hooks/useAuth";
+import { trpc } from "@/lib/trpc";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Check, ChevronRight, ExternalLink, Globe, Mail, MessageCircle, Package, Phone, Search, ShieldCheck, Truck, Wrench } from "lucide-react";
+import { Check, ChevronRight, ExternalLink, Globe, Mail, MessageCircle, Package, Phone, Search, ShieldCheck, Truck, Wrench, Upload, X } from "lucide-react";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 
 export default function Home() {
+  // The userAuth hooks provides authentication state
+  // To implement login/logout functionality, simply call logout() or redirect to getLoginUrl()
+  let { user, loading, error, isAuthenticated, logout } = useAuth();
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [uploadedPhotos, setUploadedPhotos] = useState<Array<{ filename: string; data: string; contentType: string; preview: string }>>([]);
+  const { register, handleSubmit, formState: { errors }, reset } = useForm();
+  const contactMutation = trpc.contact.submit.useMutation();
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -518,42 +529,116 @@ export default function Home() {
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div className="space-y-2">
                           <Label htmlFor="car-model">車種 <span className="text-destructive">*</span></Label>
-                          <Input id="car-model" placeholder="例：日産 スカイライン GT-R" className="bg-background/50" />
+                          <Input id="car-model" placeholder="例:日産 スカイライン GT-R" className="bg-background/50" {...register('carModel', { required: true })} />
                         </div>
                         <div className="space-y-2">
                           <Label htmlFor="car-year">年式</Label>
-                          <Input id="car-year" placeholder="例：1999年式" className="bg-background/50" />
+                          <Input id="car-year" placeholder="例:1999年式" className="bg-background/50" {...register('carYear')} />
                         </div>
                       </div>
                       
                       <div className="space-y-2">
                         <Label htmlFor="car-type">型式</Label>
-                        <Input id="car-type" placeholder="例：BNR34" className="bg-background/50" />
+                        <Input id="car-type" placeholder="例:BNR34" className="bg-background/50" {...register('carType')} />
                       </div>
 
                       <div className="space-y-2">
                         <Label htmlFor="part-name">探しているパーツ名 <span className="text-destructive">*</span></Label>
-                        <Input id="part-name" placeholder="例：純正リアウイング、NISMOメーターなど" className="bg-background/50" />
+                        <Input id="part-name" placeholder="例:純正リアウイング、NISMOメーターなど" className="bg-background/50" {...register('partName', { required: true })} />
                       </div>
 
                       <div className="space-y-2">
                         <Label htmlFor="message">詳細・備考</Label>
-                        <Textarea id="message" placeholder="その他の詳細やご要望があればご記入ください" className="min-h-[100px] bg-background/50" />
+                        <Textarea id="message" placeholder="その他の詳細やご要望があればご記入ください" className="min-h-[100px] bg-background/50" {...register('message')} />
                       </div>
 
                       <div className="space-y-2">
                         <Label>写真の添付（任意）</Label>
-                        <div className="border-2 border-dashed border-border rounded-lg p-8 text-center hover:bg-muted/50 transition-colors cursor-pointer">
+                        <input
+                          type="file"
+                          id="photo-upload"
+                          accept="image/*"
+                          multiple
+                          className="hidden"
+                          onChange={(e) => {
+                            const files = Array.from(e.target.files || []);
+                            files.forEach(file => {
+                              if (file.size > 16 * 1024 * 1024) {
+                                toast.error(`${file.name}は16MBを超えています`);
+                                return;
+                              }
+                              const reader = new FileReader();
+                              reader.onload = (event) => {
+                                const base64 = event.target?.result as string;
+                                const data = base64.split(',')[1];
+                                setUploadedPhotos(prev => [...prev, {
+                                  filename: file.name,
+                                  data,
+                                  contentType: file.type,
+                                  preview: base64,
+                                }]);
+                              };
+                              reader.readAsDataURL(file);
+                            });
+                            e.target.value = '';
+                          }}
+                        />
+                        <label
+                          htmlFor="photo-upload"
+                          className="border-2 border-dashed border-border rounded-lg p-8 text-center hover:bg-muted/50 transition-colors cursor-pointer block"
+                        >
                           <div className="flex flex-col items-center gap-2 text-muted-foreground">
-                            <Package className="h-8 w-8 opacity-50" />
+                            <Upload className="h-8 w-8 opacity-50" />
                             <span>クリックして画像をアップロード</span>
-                            <span className="text-xs">※現物や車両の写真があると照合がスムーズです</span>
+                            <span className="text-xs">※現物や車両の写真があると照合がスムーズです（最大16MB）</span>
                           </div>
-                        </div>
+                        </label>
+                        {uploadedPhotos.length > 0 && (
+                          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mt-4">
+                            {uploadedPhotos.map((photo, index) => (
+                              <div key={index} className="relative group">
+                                <img
+                                  src={photo.preview}
+                                  alt={photo.filename}
+                                  className="w-full h-32 object-cover rounded border border-border"
+                                />
+                                <button
+                                  type="button"
+                                  onClick={() => setUploadedPhotos(prev => prev.filter((_, i) => i !== index))}
+                                  className="absolute top-1 right-1 bg-destructive text-destructive-foreground rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity"
+                                >
+                                  <X className="h-4 w-4" />
+                                </button>
+                                <p className="text-xs text-muted-foreground mt-1 truncate">{photo.filename}</p>
+                              </div>
+                            ))}
+                          </div>
+                        )}
                       </div>
 
-                      <Button size="lg" className="w-full text-lg font-bold py-6 bg-primary hover:bg-primary/90 shadow-lg mt-4">
-                        パーツ探しを相談する（無料）
+                      <Button
+                        size="lg"
+                        className="w-full text-lg font-bold py-6 bg-primary hover:bg-primary/90 shadow-lg mt-4"
+                        onClick={handleSubmit(async (data) => {
+                          try {
+                            await contactMutation.mutateAsync({
+                              carModel: data.carModel,
+                              carYear: data.carYear,
+                              carType: data.carType,
+                              partName: data.partName,
+                              message: data.message,
+                              photos: uploadedPhotos,
+                            });
+                            toast.success('お問い合わせを受け付けました。担当者より折り返しご連絡いたします。');
+                            reset();
+                            setUploadedPhotos([]);
+                          } catch (error: any) {
+                            toast.error(error.message || 'お問い合わせの送信に失敗しました');
+                          }
+                        })}
+                        disabled={contactMutation.isPending}
+                      >
+                        {contactMutation.isPending ? '送信中...' : 'パーツ探しを相談する(無料)'}
                         <ChevronRight className="ml-2 h-5 w-5" />
                       </Button>
                     </CardContent>

@@ -1,0 +1,18 @@
+# Project TODO
+
+- [x] Basic homepage layout
+- [x] Navigation menu
+- [x] Hero section with background image
+- [x] Features section
+- [x] Products section
+- [x] Reviews section
+- [x] Contact form UI
+- [x] Company info section
+- [x] Footer
+- [x] BMW review image replacement
+- [x] Hero background brightness adjustment
+- [x] Endless slideshow of product images
+- [x] Remove text overlay from slideshow images
+- [x] Implement contact form email functionality to contact@usdm.co.jp
+- [x] Add photo upload functionality to contact form
+- [x] Test email sending with actual photos
