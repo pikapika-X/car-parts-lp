@@ -18,16 +18,16 @@ export default function Home() {
   };
 
   const productsData = [
-    { name: "USヘッドライト", url: "https://search.rakuten.co.jp/search/mall/%E3%83%98%E3%83%83%E3%83%89%E3%83%A9%E3%82%A4%E3%83%88/?l-id=shoptop_shopmenu_search_bar&sid=332596" },
-    { name: "USテールライト", url: "https://search.rakuten.co.jp/search/mall/%E3%83%86%E3%83%BC%E3%83%AB%E3%83%A9%E3%82%A4%E3%83%88/?l-id=shoptop_shopmenu_search_bar&sid=332596" },
-    { name: "USエアロパーツ", url: "https://search.rakuten.co.jp/search/mall/%E3%82%A8%E3%82%A2%E3%83%AD/?sid=332596" },
-    { name: "USグリル", url: "https://search.rakuten.co.jp/search/mall/%E3%82%B0%E3%83%AA%E3%83%AB/?sid=332596" },
-    { name: "USサイドステップ", url: "https://search.rakuten.co.jp/search/mall/%E3%82%B5%E3%82%A4%E3%83%89%E3%82%B9%E3%83%86%E3%83%83%E3%83%97/?sid=332596" },
-    { name: "USスポイラー", url: "https://search.rakuten.co.jp/search/mall/%E3%82%B9%E3%83%9D%E3%82%A4%E3%83%A9%E3%83%BC/?sid=332596" },
-    { name: "US幌・ソフトトップ", url: "https://search.rakuten.co.jp/search/mall/%E5%B9%8C/?sid=332596" },
-    { name: "USガルウィングキット", url: "https://search.rakuten.co.jp/search/mall/%E3%82%AC%E3%83%AB%E3%82%A6%E3%82%A3%E3%83%B3%E3%82%B0/?sid=332596" },
-    { name: "USクロスバー", url: "https://search.rakuten.co.jp/search/mall/%E3%82%AF%E3%83%AD%E3%82%B9%E3%83%90%E3%83%BC/?sid=332596" },
-    { name: "USカーゴ、ルーフ キャリア", url: "https://search.rakuten.co.jp/search/mall/%E3%82%AF%E3%83%AD%E3%82%B9%E3%83%90%E3%83%BC/?sid=332596" }
+    { name: "USヘッドライト", url: "https://search.rakuten.co.jp/search/mall/%E3%83%98%E3%83%83%E3%83%89%E3%83%A9%E3%82%A4%E3%83%88/?l-id=shoptop_shopmenu_search_bar&sid=332596", image: "/images/parts/headlight.jpg" },
+    { name: "USテールライト", url: "https://search.rakuten.co.jp/search/mall/%E3%83%86%E3%83%BC%E3%83%AB%E3%83%A9%E3%82%A4%E3%83%88/?l-id=shoptop_shopmenu_search_bar&sid=332596", image: "/images/parts/taillight.jpg" },
+    { name: "USエアロパーツ", url: "https://search.rakuten.co.jp/search/mall/%E3%82%A8%E3%82%A2%E3%83%AD/?sid=332596", image: "/images/parts/aero.jpg" },
+    { name: "USグリル", url: "https://search.rakuten.co.jp/search/mall/%E3%82%B0%E3%83%AA%E3%83%AB/?sid=332596", image: "/images/parts/grille.jpg" },
+    { name: "USサイドステップ", url: "https://search.rakuten.co.jp/search/mall/%E3%82%B5%E3%82%A4%E3%83%89%E3%82%B9%E3%83%86%E3%83%83%E3%83%97/?sid=332596", image: "/images/parts/sidestep.jpg" },
+    { name: "USスポイラー", url: "https://search.rakuten.co.jp/search/mall/%E3%82%B9%E3%83%9D%E3%82%A4%E3%83%A9%E3%83%BC/?sid=332596", image: "/images/parts/spoiler.jpg" },
+    { name: "US幌・ソフトトップ", url: "https://search.rakuten.co.jp/search/mall/%E5%B9%8C/?sid=332596", image: "/images/parts/softtop.jpg" },
+    { name: "USガルウィングキット", url: "https://search.rakuten.co.jp/search/mall/%E3%82%AC%E3%83%AB%E3%82%A6%E3%82%A3%E3%83%B3%E3%82%B0/?sid=332596", image: "/images/parts/gullwing.jpg" },
+    { name: "USクロスバー", url: "https://search.rakuten.co.jp/search/mall/%E3%82%AF%E3%83%AD%E3%82%B9%E3%83%90%E3%83%BC/?sid=332596", image: "/images/parts/crossbar.jpg" },
+    { name: "USカーゴ、ルーフ キャリア", url: "https://search.rakuten.co.jp/search/mall/%E3%82%AF%E3%83%AD%E3%82%B9%E3%83%90%E3%83%BC/?sid=332596", image: "/images/parts/cargo.jpg" }
   ];
 
   return (
@@ -265,8 +265,8 @@ export default function Home() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
                   <div className="absolute inset-0 bg-muted-foreground/10 group-hover:scale-110 transition-transform duration-500"></div>
                   <img 
-                    src="/images/parts-collection.jpg" 
-                    className="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-70 transition-opacity" 
+                    src={item.image} 
+                    className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity group-hover:scale-105 duration-500" 
                     alt={item.name} 
                   />
                   <div className="absolute inset-0 flex flex-col items-center justify-center p-3 z-20">
