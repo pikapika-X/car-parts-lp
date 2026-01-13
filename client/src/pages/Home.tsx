@@ -120,9 +120,7 @@ export default function Home() {
                       alt={product.name} 
                       className="w-full h-full object-cover opacity-70 group-hover:opacity-100 transition-opacity duration-300"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end justify-center p-2">
-                      <span className="text-xs text-white font-bold truncate w-full text-center">{product.name}</span>
-                    </div>
+
                   </div>
                 ))}
               </div>
@@ -135,9 +133,7 @@ export default function Home() {
                       alt={product.name} 
                       className="w-full h-full object-cover opacity-70 group-hover:opacity-100 transition-opacity duration-300"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end justify-center p-2">
-                      <span className="text-xs text-white font-bold truncate w-full text-center">{product.name}</span>
-                    </div>
+
                   </div>
                 ))}
               </div>
