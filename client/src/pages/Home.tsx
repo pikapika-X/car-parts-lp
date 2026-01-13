@@ -321,6 +321,126 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Reviews Section */}
+        <section id="reviews" className="py-20 bg-muted/30 relative">
+          <div className="absolute inset-0 bg-metal-texture opacity-30"></div>
+          <div className="container relative z-10 px-4">
+            <div className="text-center mb-16">
+              <span className="text-primary font-bold tracking-widest uppercase text-sm">Customer Reviews</span>
+              <h2 className="text-3xl md:text-5xl font-heading font-bold mt-2">お客様の声</h2>
+              <p className="text-muted-foreground mt-4 max-w-2xl mx-auto">
+                実際に当店をご利用いただいたお客様から、喜びの声を多数いただいております。
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {/* Review 1 */}
+              <Card className="bg-card/50 border-border/50 backdrop-blur hover:border-primary/50 transition-all duration-300 overflow-hidden group">
+                <div className="aspect-video w-full overflow-hidden">
+                  <img 
+                    src="/images/reviews/review1.png" 
+                    alt="新型ディフェンダー カスタム" 
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                </div>
+                <CardContent className="p-6 md:p-8">
+                  <div className="flex items-center gap-2 mb-4">
+                    <div className="flex text-amber-500">
+                      {[...Array(5)].map((_, i) => (
+                        <svg key={i} className="w-4 h-4 fill-current" viewBox="0 0 20 20">
+                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                        </svg>
+                      ))}
+                    </div>
+                    <span className="text-sm font-bold text-primary">新型ディフェンダー カスタム</span>
+                  </div>
+                  <p className="text-muted-foreground leading-relaxed mb-4">
+                    「正直、純正パーツだと予算的に厳しかったのですが、こちらは純正よりも大幅に安く、それでいて仕上がりは想像以上でした。見た目の迫力や統一感が一気に増し、『最初からこの仕様だったのでは？』と思うほど自然でかっこいいです。価格だけでなく、フィッティングや質感にも満足しています。」
+                  </p>
+                </CardContent>
+              </Card>
+
+              {/* Review 2 */}
+              <Card className="bg-card/50 border-border/50 backdrop-blur hover:border-primary/50 transition-all duration-300 overflow-hidden group">
+                <div className="aspect-video w-full overflow-hidden">
+                  <img 
+                    src="/images/reviews/review2.png" 
+                    alt="フロント・リアスポイラー装着" 
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                </div>
+                <CardContent className="p-6 md:p-8">
+                  <div className="flex items-center gap-2 mb-4">
+                    <div className="flex text-amber-500">
+                      {[...Array(5)].map((_, i) => (
+                        <svg key={i} className="w-4 h-4 fill-current" viewBox="0 0 20 20">
+                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                        </svg>
+                      ))}
+                    </div>
+                    <span className="text-sm font-bold text-primary">リアスポイラー装着</span>
+                  </div>
+                  <p className="text-muted-foreground leading-relaxed mb-4">
+                    「海外からの取り寄せのため少し待ちましたが、実物を見て装着した瞬間、待った甲斐があったと感じました。大きく主張しすぎないのにフロントの印象が引き締まり、車全体が低く、スポーティに見えます。価格を抑えつつ、この仕上がりであれば十分満足です。」
+                  </p>
+                </CardContent>
+              </Card>
+
+              {/* Review 3 */}
+              <Card className="bg-card/50 border-border/50 backdrop-blur hover:border-primary/50 transition-all duration-300 overflow-hidden group">
+                <div className="aspect-video w-full overflow-hidden">
+                  <img 
+                    src="/images/reviews/review3.png" 
+                    alt="ヘッドライト交換" 
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                </div>
+                <CardContent className="p-6 md:p-8">
+                  <div className="flex items-center gap-2 mb-4">
+                    <div className="flex text-amber-500">
+                      {[...Array(5)].map((_, i) => (
+                        <svg key={i} className="w-4 h-4 fill-current" viewBox="0 0 20 20">
+                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                        </svg>
+                      ))}
+                    </div>
+                    <span className="text-sm font-bold text-primary">ヘッドライト交換</span>
+                  </div>
+                  <p className="text-muted-foreground leading-relaxed mb-4">
+                    「日本国内では希望するデザインのヘッドライトが見つからず、年式と型式を伝えて相談しました。対応もスムーズで、適合確認までしてもらえたので安心でした。純正とは違う表情になり、フロント周りがかなり引き締まりました。」
+                  </p>
+                </CardContent>
+              </Card>
+
+              {/* Review 4 */}
+              <Card className="bg-card/50 border-border/50 backdrop-blur hover:border-primary/50 transition-all duration-300 overflow-hidden group">
+                <div className="aspect-video w-full overflow-hidden">
+                  <img 
+                    src="/images/reviews/review4.jpg" 
+                    alt="カスタムパーツ一式" 
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                </div>
+                <CardContent className="p-6 md:p-8">
+                  <div className="flex items-center gap-2 mb-4">
+                    <div className="flex text-amber-500">
+                      {[...Array(5)].map((_, i) => (
+                        <svg key={i} className="w-4 h-4 fill-current" viewBox="0 0 20 20">
+                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                        </svg>
+                      ))}
+                    </div>
+                    <span className="text-sm font-bold text-primary">自分だけの1台へ</span>
+                  </div>
+                  <p className="text-muted-foreground leading-relaxed mb-4">
+                    「高級感や迫力はもちろんですが、既製品ではなく、自分の感覚に合わせて整えたことで、『自分の相棒になった感じ』が一層感じられ、長く乗り続けたいと思える一台になりました。」
+                  </p>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </section>
+
         {/* Contact Section */}
         <section id="contact" className="py-20 bg-background relative">
           <div className="absolute inset-0 bg-gradient-to-b from-background to-muted/20"></div>
