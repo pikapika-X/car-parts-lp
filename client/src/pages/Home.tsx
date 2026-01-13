@@ -337,6 +337,18 @@ export default function Home() {
                 </p>
               </div>
 
+              <div className="bg-amber-500/10 border border-amber-500/30 rounded-lg p-4 mb-8 flex items-start gap-3">
+                <div className="text-amber-500 font-bold text-lg flex-shrink-0">⚠</div>
+                <div className="text-sm text-amber-50">
+                  <p className="font-bold mb-1">ご購入前に必ず利用規約をお読みください</p>
+                  <p className="text-xs opacity-90 mb-2">海外製パーツの特性、返品・交換条件、その他重要な注意事項が記載されています。</p>
+                  <a href="/docs/terms-of-service.pdf" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-amber-300 hover:text-amber-200 transition-colors text-xs font-bold">
+                    <ExternalLink className="h-3 w-3" />
+                    利用規約を確認する
+                  </a>
+                </div>
+              </div>
+
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                 {/* Contact Form */}
                 <div className="lg:col-span-2">
@@ -506,7 +518,13 @@ export default function Home() {
                   大手モールで培った経験と実績を活かし、自社サイトではより分かりやすく、より安心できる情報提供を行っています。
                 </p>
               </div>
-              <div className="flex flex-col md:items-end justify-center">
+              <div className="flex flex-col md:items-end justify-center gap-4">
+                <div className="flex gap-4 text-xs text-gray-400">
+                  <a href="/docs/terms-of-service.pdf" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors flex items-center gap-1">
+                    <ExternalLink className="h-3 w-3" />
+                    利用規約
+                  </a>
+                </div>
                 <div className="text-gray-500 text-sm">
                   &copy; {new Date().getFullYear()} Global Parts Import. All rights reserved.
                 </div>
