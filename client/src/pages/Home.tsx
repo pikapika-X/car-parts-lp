@@ -78,10 +78,10 @@ export default function Home() {
             <img 
               src="/images/hero-bg.jpg" 
               alt="Engine Bay" 
-              className="w-full h-full object-cover opacity-40"
+              className="w-full h-full object-cover opacity-65"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-black/40"></div>
-            <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
+            <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent"></div>
+            <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
           </div>
           
           <div className="container relative z-10 px-4 py-20 text-center">
