@@ -78,7 +78,7 @@ export default function Home() {
             <img 
               src="/images/hero-bg.jpg" 
               alt="Engine Bay" 
-              className="w-full h-full object-cover opacity-50"
+              className="w-full h-full object-cover opacity-40"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-black/40"></div>
             <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
