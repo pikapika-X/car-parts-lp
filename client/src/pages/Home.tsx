@@ -76,9 +76,9 @@ export default function Home() {
         <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden">
           <div className="absolute inset-0 z-0">
             <img 
-              src="/images/hero-bg.jpg" 
-              alt="Engine Bay" 
-              className="w-full h-full object-cover opacity-20"
+              src="/images/hero-bg-carparts.jpg" 
+              alt="Imported Car Parts Display" 
+              className="w-full h-full object-cover opacity-30"
             />
             <div className="absolute inset-0 bg-gradient-to-b from-primary/30 via-background to-background"></div>
             <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-black/40"></div>
