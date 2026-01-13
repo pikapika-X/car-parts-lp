@@ -3,7 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Check, ChevronRight, Globe, Mail, Package, Search, ShieldCheck, Truck, Wrench } from "lucide-react";
+import { Check, ChevronRight, ExternalLink, Globe, Mail, MessageCircle, Package, Phone, Search, ShieldCheck, Truck, Wrench } from "lucide-react";
 import { useState } from "react";
 
 export default function Home() {
@@ -16,6 +16,19 @@ export default function Home() {
     }
     setIsMenuOpen(false);
   };
+
+  const productsData = [
+    { name: "USヘッドライト", url: "https://search.rakuten.co.jp/search/mall/%E3%83%98%E3%83%83%E3%83%89%E3%83%A9%E3%82%A4%E3%83%88/?l-id=shoptop_shopmenu_search_bar&sid=332596" },
+    { name: "USテールライト", url: "https://search.rakuten.co.jp/search/mall/%E3%83%86%E3%83%BC%E3%83%AB%E3%83%A9%E3%82%A4%E3%83%88/?l-id=shoptop_shopmenu_search_bar&sid=332596" },
+    { name: "USエアロパーツ", url: "https://search.rakuten.co.jp/search/mall/%E3%82%A8%E3%82%A2%E3%83%AD/?sid=332596" },
+    { name: "USグリル", url: "https://search.rakuten.co.jp/search/mall/%E3%82%B0%E3%83%AA%E3%83%AB/?sid=332596" },
+    { name: "USサイドステップ", url: "https://search.rakuten.co.jp/search/mall/%E3%82%B5%E3%82%A4%E3%83%89%E3%82%B9%E3%83%86%E3%83%83%E3%83%97/?sid=332596" },
+    { name: "USスポイラー", url: "https://search.rakuten.co.jp/search/mall/%E3%82%B9%E3%83%9D%E3%82%A4%E3%83%A9%E3%83%BC/?sid=332596" },
+    { name: "US幌・ソフトトップ", url: "https://search.rakuten.co.jp/search/mall/%E5%B9%8C/?sid=332596" },
+    { name: "USガルウィングキット", url: "https://search.rakuten.co.jp/search/mall/%E3%82%AC%E3%83%AB%E3%82%A6%E3%82%A3%E3%83%B3%E3%82%B0/?sid=332596" },
+    { name: "USクロスバー", url: "https://search.rakuten.co.jp/search/mall/%E3%82%AF%E3%83%AD%E3%82%B9%E3%83%90%E3%83%BC/?sid=332596" },
+    { name: "USカーゴ、ルーフ キャリア", url: "https://search.rakuten.co.jp/search/mall/%E3%82%AF%E3%83%AD%E3%82%B9%E3%83%90%E3%83%BC/?sid=332596" }
+  ];
 
   return (
     <div className="min-h-screen flex flex-col bg-background text-foreground overflow-x-hidden">
@@ -147,7 +160,6 @@ export default function Home() {
                     継続的な販売実績と評価を積み重ね、「海外パーツでも安心して購入できる店舗」として多くのお客様にご利用いただいています。
                   </p>
                   <div className="flex gap-4 opacity-70 grayscale hover:grayscale-0 transition-all">
-                    {/* Logos placeholder text for now */}
                     <div className="px-4 py-2 bg-white text-black font-bold rounded text-sm">Yahoo! Shopping</div>
                     <div className="px-4 py-2 bg-white text-black font-bold rounded text-sm">Rakuten</div>
                   </div>
@@ -238,30 +250,33 @@ export default function Home() {
           <div className="container px-4">
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-5xl font-heading font-bold mb-4">取扱・調達実績</h2>
-              <p className="text-muted-foreground">※下記はこれまでに取り扱った商品の一例です</p>
+              <p className="text-muted-foreground">楽天市場でのお取り扱い商品一覧</p>
             </div>
 
-            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
-              {[
-                "海外OEMエンジンパーツ", "足回り・サスペンション", "エアロパーツ", "内装アクセサリー", "外装アクセサリー",
-                "電装部品", "補修部品", "ターボチャージャー", "インタークーラー", "クラッチキット",
-                "ECUユニット", "ヘッドライト", "テールランプ", "ボディキット", "シートパーツ",
-                "ステアリングホイール", "シフトノブ", "ブレーキキャリパー", "エキゾーストマニホールド", "ラジエーター"
-              ].map((item, i) => (
-                <div key={i} className="group relative aspect-square bg-muted rounded-lg overflow-hidden border border-border/50 hover:border-primary transition-colors">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+              {productsData.map((item, i) => (
+                <a 
+                  key={i} 
+                  href={item.url} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="group relative aspect-square bg-muted rounded-lg overflow-hidden border border-border/50 hover:border-primary transition-all duration-300 hover:shadow-[0_0_15px_rgba(249,115,22,0.3)]"
+                >
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
-                  {/* Placeholder for product images - using a generic pattern or the generated image crop if possible, 
-                      but for now using a colored div to represent image */}
                   <div className="absolute inset-0 bg-muted-foreground/10 group-hover:scale-110 transition-transform duration-500"></div>
-                  
-                  {/* Using the generated parts collection image as background for all for demo purposes, 
-                      in real app would be individual images */}
-                  <img src="/images/parts-collection.jpg" className="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-70 transition-opacity" alt={item} />
-                  
-                  <div className="absolute bottom-0 left-0 right-0 p-3 z-20">
-                    <p className="text-xs md:text-sm font-bold text-white text-center">{item}</p>
+                  <img 
+                    src="/images/parts-collection.jpg" 
+                    className="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-70 transition-opacity" 
+                    alt={item.name} 
+                  />
+                  <div className="absolute inset-0 flex flex-col items-center justify-center p-3 z-20">
+                    <p className="text-xs md:text-sm font-bold text-white text-center mb-2">{item.name}</p>
+                    <div className="flex items-center gap-1 px-2 py-1 bg-primary text-primary-foreground rounded text-xs font-bold opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                      <ExternalLink className="h-3 w-3" />
+                      楽天で見る
+                    </div>
                   </div>
-                </div>
+                </a>
               ))}
             </div>
             
@@ -310,7 +325,7 @@ export default function Home() {
         <section id="contact" className="py-20 bg-background relative">
           <div className="absolute inset-0 bg-gradient-to-b from-background to-muted/20"></div>
           <div className="container relative z-10 px-4">
-            <div className="max-w-3xl mx-auto">
+            <div className="max-w-5xl mx-auto">
               <div className="text-center mb-10">
                 <div className="inline-block px-4 py-1 bg-primary/20 text-primary rounded-full text-sm font-bold mb-4">
                   まずはお気軽にご相談ください
@@ -322,58 +337,155 @@ export default function Home() {
                 </p>
               </div>
 
-              <Card className="border-primary/30 shadow-[0_0_30px_rgba(0,0,0,0.3)] bg-card/80 backdrop-blur">
-                <CardHeader className="bg-muted/50 border-b border-border">
-                  <CardTitle className="flex items-center gap-2">
-                    <Search className="text-primary" />
-                    お問い合わせフォーム
-                  </CardTitle>
-                  <CardDescription>
-                    以下の情報を入力して送信してください。担当者が確認後、ご連絡いたします。
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="p-6 md:p-8 space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <Label htmlFor="car-model">車種 <span className="text-destructive">*</span></Label>
-                      <Input id="car-model" placeholder="例：日産 スカイライン GT-R" className="bg-background/50" />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="car-year">年式</Label>
-                      <Input id="car-year" placeholder="例：1999年式" className="bg-background/50" />
-                    </div>
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <Label htmlFor="car-type">型式</Label>
-                    <Input id="car-type" placeholder="例：BNR34" className="bg-background/50" />
-                  </div>
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                {/* Contact Form */}
+                <div className="lg:col-span-2">
+                  <Card className="border-primary/30 shadow-[0_0_30px_rgba(0,0,0,0.3)] bg-card/80 backdrop-blur">
+                    <CardHeader className="bg-muted/50 border-b border-border">
+                      <CardTitle className="flex items-center gap-2">
+                        <Search className="text-primary" />
+                        お問い合わせフォーム
+                      </CardTitle>
+                      <CardDescription>
+                        以下の情報を入力して送信してください。担当者が確認後、ご連絡いたします。
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent className="p-6 md:p-8 space-y-6">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div className="space-y-2">
+                          <Label htmlFor="car-model">車種 <span className="text-destructive">*</span></Label>
+                          <Input id="car-model" placeholder="例：日産 スカイライン GT-R" className="bg-background/50" />
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="car-year">年式</Label>
+                          <Input id="car-year" placeholder="例：1999年式" className="bg-background/50" />
+                        </div>
+                      </div>
+                      
+                      <div className="space-y-2">
+                        <Label htmlFor="car-type">型式</Label>
+                        <Input id="car-type" placeholder="例：BNR34" className="bg-background/50" />
+                      </div>
 
-                  <div className="space-y-2">
-                    <Label htmlFor="part-name">探しているパーツ名 <span className="text-destructive">*</span></Label>
-                    <Input id="part-name" placeholder="例：純正リアウイング、NISMOメーターなど" className="bg-background/50" />
-                  </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="part-name">探しているパーツ名 <span className="text-destructive">*</span></Label>
+                        <Input id="part-name" placeholder="例：純正リアウイング、NISMOメーターなど" className="bg-background/50" />
+                      </div>
 
-                  <div className="space-y-2">
-                    <Label htmlFor="message">詳細・備考</Label>
-                    <Textarea id="message" placeholder="その他の詳細やご要望があればご記入ください" className="min-h-[100px] bg-background/50" />
-                  </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="message">詳細・備考</Label>
+                        <Textarea id="message" placeholder="その他の詳細やご要望があればご記入ください" className="min-h-[100px] bg-background/50" />
+                      </div>
 
-                  <div className="space-y-2">
-                    <Label>写真の添付（任意）</Label>
-                    <div className="border-2 border-dashed border-border rounded-lg p-8 text-center hover:bg-muted/50 transition-colors cursor-pointer">
-                      <div className="flex flex-col items-center gap-2 text-muted-foreground">
-                        <Package className="h-8 w-8 opacity-50" />
-                        <span>クリックして画像をアップロード</span>
-                        <span className="text-xs">※現物や車両の写真があると照合がスムーズです</span>
+                      <div className="space-y-2">
+                        <Label>写真の添付（任意）</Label>
+                        <div className="border-2 border-dashed border-border rounded-lg p-8 text-center hover:bg-muted/50 transition-colors cursor-pointer">
+                          <div className="flex flex-col items-center gap-2 text-muted-foreground">
+                            <Package className="h-8 w-8 opacity-50" />
+                            <span>クリックして画像をアップロード</span>
+                            <span className="text-xs">※現物や車両の写真があると照合がスムーズです</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <Button size="lg" className="w-full text-lg font-bold py-6 bg-primary hover:bg-primary/90 shadow-lg mt-4">
+                        パーツ探しを相談する（無料）
+                        <ChevronRight className="ml-2 h-5 w-5" />
+                      </Button>
+                    </CardContent>
+                  </Card>
+                </div>
+
+                {/* LINE Contact Option */}
+                <div className="flex flex-col gap-6">
+                  <Card className="border-primary/30 shadow-lg bg-card/80 backdrop-blur h-full">
+                    <CardHeader className="bg-gradient-to-r from-primary/20 to-primary/10 border-b border-border">
+                      <CardTitle className="flex items-center gap-2 text-primary">
+                        <MessageCircle className="h-5 w-5" />
+                        LINEでも相談できます
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="p-6 flex flex-col items-center justify-center h-full">
+                      <p className="text-sm text-muted-foreground text-center mb-6">
+                        QRコードをスキャンするか、下のボタンをタップしてLINEで気軽にお問い合わせください。
+                      </p>
+                      
+                      <div className="bg-white p-4 rounded-lg mb-6">
+                        <img 
+                          src="/images/line-qr.png" 
+                          alt="LINE QR Code" 
+                          className="w-40 h-40"
+                        />
+                      </div>
+
+                      <Button 
+                        asChild 
+                        className="w-full bg-[#00B900] hover:bg-[#00A000] text-white font-bold mb-4"
+                      >
+                        <a href="https://page.line.me/414xknuy" target="_blank" rel="noopener noreferrer">
+                          <MessageCircle className="mr-2 h-5 w-5" />
+                          LINEで友達追加
+                        </a>
+                      </Button>
+
+                      <div className="text-xs text-muted-foreground text-center">
+                        <p className="font-bold mb-2">LINE ID: @414xknuy</p>
+                        <p>営業時間内にご返信いたします</p>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Company Info Section */}
+        <section className="py-20 bg-muted/20 border-t border-border/30">
+          <div className="container px-4">
+            <div className="max-w-3xl mx-auto">
+              <h2 className="text-3xl md:text-4xl font-heading font-bold mb-12 text-center">運営会社について</h2>
+              
+              <Card className="border-border/50 shadow-lg bg-card/50 backdrop-blur">
+                <CardContent className="p-8 md:p-12">
+                  <div className="mb-8">
+                    <h3 className="text-2xl font-bold mb-6 flex items-center gap-2">
+                      <Wrench className="h-6 w-6 text-primary" />
+                      株式会社ＵＳＤＭ
+                    </h3>
+                    
+                    <div className="space-y-4 text-muted-foreground">
+                      <div className="flex gap-4 items-start">
+                        <span className="font-bold text-foreground min-w-fit">住所：</span>
+                        <span>〒9240857 石川県白山市福永町８５ー１F</span>
+                      </div>
+                      <div className="flex gap-4 items-start">
+                        <span className="font-bold text-foreground min-w-fit">電話：</span>
+                        <a href="tel:08011771078" className="hover:text-primary transition-colors">080-1177-1078</a>
+                      </div>
+                      <div className="flex gap-4 items-start">
+                        <span className="font-bold text-foreground min-w-fit">FAX：</span>
+                        <span>050-3588-2307</span>
+                      </div>
+                      <div className="flex gap-4 items-start">
+                        <span className="font-bold text-foreground min-w-fit">メール：</span>
+                        <a href="mailto:contact@usdm.co.jp" className="hover:text-primary transition-colors">contact@usdm.co.jp</a>
+                      </div>
+                      <div className="flex gap-4 items-start">
+                        <span className="font-bold text-foreground min-w-fit">ウェブサイト：</span>
+                        <a href="https://usdm.jp/" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors flex items-center gap-1">
+                          https://usdm.jp/ <ExternalLink className="h-3 w-3" />
+                        </a>
                       </div>
                     </div>
                   </div>
 
-                  <Button size="lg" className="w-full text-lg font-bold py-6 bg-primary hover:bg-primary/90 shadow-lg mt-4">
-                    パーツ探しを相談する（無料）
-                    <ChevronRight className="ml-2 h-5 w-5" />
-                  </Button>
+                  <div className="border-t border-border pt-8">
+                    <p className="text-muted-foreground leading-relaxed">
+                      当社は海外カーパーツの輸入・販売を専門に行う事業者です。
+                      大手モールで培った経験と実績を活かし、自社サイトではより分かりやすく、より安心できる情報提供を行っています。
+                    </p>
+                  </div>
                 </CardContent>
               </Card>
             </div>
@@ -395,9 +507,6 @@ export default function Home() {
                 </p>
               </div>
               <div className="flex flex-col md:items-end justify-center">
-                <Button variant="outline" className="border-gray-700 text-gray-300 hover:bg-gray-800 hover:text-white mb-4">
-                  運営会社について
-                </Button>
                 <div className="text-gray-500 text-sm">
                   &copy; {new Date().getFullYear()} Global Parts Import. All rights reserved.
                 </div>
