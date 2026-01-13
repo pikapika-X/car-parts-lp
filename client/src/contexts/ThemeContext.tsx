@@ -14,16 +14,18 @@ interface ThemeProviderProps {
   children: React.ReactNode;
   defaultTheme?: Theme;
   switchable?: boolean;
+  storageKey?: string;
 }
 
 export function ThemeProvider({
   children,
   defaultTheme = "light",
   switchable = false,
+  storageKey = "theme",
 }: ThemeProviderProps) {
   const [theme, setTheme] = useState<Theme>(() => {
     if (switchable) {
-      const stored = localStorage.getItem("theme");
+      const stored = localStorage.getItem(storageKey);
       return (stored as Theme) || defaultTheme;
     }
     return defaultTheme;
@@ -38,9 +40,9 @@ export function ThemeProvider({
     }
 
     if (switchable) {
-      localStorage.setItem("theme", theme);
+      localStorage.setItem(storageKey, theme);
     }
-  }, [theme, switchable]);
+  }, [theme, switchable, storageKey]);
 
   const toggleTheme = switchable
     ? () => {
