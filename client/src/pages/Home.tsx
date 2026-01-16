@@ -557,7 +557,7 @@ export default function Home() {
 
                       <div className="space-y-2">
                         <Label htmlFor="part-name">探しているパーツ名 <span className="text-destructive">*</span></Label>
-                        <Input id="part-name" placeholder="例:純正リアウイング、NISMOメーターなど" className="bg-background/50" {...register('partName', { required: true })} />
+                        <Input id="part-name" placeholder="例:リアウィング、NISMOメーターなど" className="bg-background/50" {...register('partName', { required: true })} />
                       </div>
 
                       <div className="space-y-2">
