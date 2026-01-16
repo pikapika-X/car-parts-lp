@@ -573,6 +573,14 @@ export default function Home() {
                           className="hidden"
                           onChange={(e) => {
                             const files = Array.from(e.target.files || []);
+                            
+                            // Check if adding these files would exceed the limit
+                            if (uploadedPhotos.length + files.length > 5) {
+                              toast.error(`写真は最大5枚までアップロードできます（現在${uploadedPhotos.length}枚）`);
+                              e.target.value = '';
+                              return;
+                            }
+                            
                             files.forEach(file => {
                               if (file.size > 16 * 1024 * 1024) {
                                 toast.error(`${file.name}は16MBを超えています`);
@@ -601,7 +609,10 @@ export default function Home() {
                           <div className="flex flex-col items-center gap-2 text-muted-foreground">
                             <Upload className="h-8 w-8 opacity-50" />
                             <span>クリックして画像をアップロード</span>
-                            <span className="text-xs">※現物や車両の写真があると照合がスムーズです（最大16MB）</span>
+                            <span className="text-xs">※現物や車両の写真があると照合がスムーズです（最大5枚、各16MB）</span>
+                            {uploadedPhotos.length > 0 && (
+                              <span className="text-xs text-primary font-medium">{uploadedPhotos.length}/5枚</span>
+                            )}
                           </div>
                         </label>
                         {uploadedPhotos.length > 0 && (
