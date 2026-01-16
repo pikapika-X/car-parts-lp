@@ -110,8 +110,8 @@ ${uploadedPhotos.map(photo => `- ${photo.filename}: ${photo.url}`).join('\n')}
 ` : ''}
         `;
 
-        // Send email
-        const success = await sendEmail({
+        // Send email to admin
+        const adminEmailSuccess = await sendEmail({
           to: 'contact@usdm.co.jp',
           replyTo: input.customerEmail,
           subject: `【お問い合わせ】${input.customerName}様 - ${input.carModel} - ${input.partName}`,
@@ -119,8 +119,44 @@ ${uploadedPhotos.map(photo => `- ${photo.filename}: ${photo.url}`).join('\n')}
           html: emailHtml,
         });
 
-        if (!success) {
-          throw new Error('Failed to send email');
+        if (!adminEmailSuccess) {
+          throw new Error('Failed to send admin email');
+        }
+
+        // Send auto-reply email to customer
+        const autoReplyHtml = `
+          <p>${input.customerName}様</p>
+          <p>いつもお問い合わせいただきありがとうございます。</p>
+          <p>お問い合わせを受け付けました。</p>
+          <p>2営業日以内にご返信いたします。</p>
+          <p>よろしくお願いいたします。</p>
+          <p style="margin-top: 20px; font-weight: bold;">株式会社USDM</p>
+        `;
+
+        const autoReplyText = `
+${input.customerName}様
+
+いつもお問い合わせいただきありがとうございます。
+
+お問い合わせを受け付けました。
+
+2営業日以内にご返信いたします。
+
+よろしくお願いいたします。
+
+株式会社USDM
+        `;
+
+        const autoReplySuccess = await sendEmail({
+          to: input.customerEmail,
+          from: 'contact@usdm.co.jp',
+          subject: '【GLOBAL PARTS IMPORT】お問い合わせを受け付けました',
+          text: autoReplyText,
+          html: autoReplyHtml,
+        });
+
+        if (!autoReplySuccess) {
+          console.warn('[Contact] Failed to send auto-reply email to customer');
         }
 
         return {

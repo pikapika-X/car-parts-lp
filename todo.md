@@ -19,3 +19,4 @@
 - [x] Configure Xserver SMTP settings (sv5308.xserver.jp:465)
 - [x] お問い合わせフォームにお客様名とメールアドレスフィールドを追加（必須項目）
 - [x] 写真アップロードを最大5枚まで対応（現在は無制限）
+- [x] フォーム送信時にお客様に自動返信メールを送信（送信者: contact@usdm.co.jp）

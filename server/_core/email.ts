@@ -2,6 +2,7 @@ import nodemailer from 'nodemailer';
 
 export interface EmailOptions {
   to: string;
+  from?: string;
   replyTo?: string;
   subject: string;
   text?: string;
@@ -51,7 +52,7 @@ export async function sendEmail(options: EmailOptions): Promise<boolean> {
     console.log(`[Email] Sending email to: ${options.to}`);
     
     await transporter.sendMail({
-      from: smtpFrom,
+      from: options.from || smtpFrom,
       to: options.to,
       replyTo: options.replyTo,
       subject: options.subject,
