@@ -17,3 +17,4 @@
 - [x] Add photo upload functionality to contact form
 - [x] Test email sending with actual photos
 - [x] Configure Xserver SMTP settings (sv5308.xserver.jp:465)
+- [x] お問い合わせフォームにお客様名とメールアドレスフィールドを追加（必須項目）

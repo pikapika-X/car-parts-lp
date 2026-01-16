@@ -2,6 +2,7 @@ import nodemailer from 'nodemailer';
 
 export interface EmailOptions {
   to: string;
+  replyTo?: string;
   subject: string;
   text?: string;
   html?: string;
@@ -35,6 +36,8 @@ export async function sendEmail(options: EmailOptions): Promise<boolean> {
       return false;
     }
 
+    console.log(`[Email] Connecting to SMTP: ${smtpHost}:${smtpPort} (secure: ${smtpPort === 465})`);
+    
     const transporter = nodemailer.createTransport({
       host: smtpHost,
       port: smtpPort,
@@ -45,9 +48,12 @@ export async function sendEmail(options: EmailOptions): Promise<boolean> {
       },
     });
 
+    console.log(`[Email] Sending email to: ${options.to}`);
+    
     await transporter.sendMail({
       from: smtpFrom,
       to: options.to,
+      replyTo: options.replyTo,
       subject: options.subject,
       text: options.text,
       html: options.html,
@@ -57,7 +63,9 @@ export async function sendEmail(options: EmailOptions): Promise<boolean> {
     console.log(`[Email] Successfully sent email to ${options.to}`);
     return true;
   } catch (error) {
-    console.error('[Email] Failed to send email:', error);
+    const errorMessage = error instanceof Error ? error.message : String(error);
+    console.error('[Email] Failed to send email:', errorMessage);
+    console.error('[Email] Error details:', error);
     return false;
   }
 }

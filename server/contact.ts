@@ -4,6 +4,8 @@ import { sendEmail } from './_core/email';
 import { storagePut } from './storage';
 
 const contactFormSchema = z.object({
+  customerName: z.string().min(1, 'お名前を入力してください'),
+  customerEmail: z.string().email('有効なメールアドレスを入力してください'),
   carModel: z.string().min(1, '車種を入力してください'),
   carYear: z.string().optional(),
   carType: z.string().optional(),
@@ -40,6 +42,14 @@ export const contactRouter = router({
         const emailHtml = `
           <h2>お問い合わせフォームからの新規メッセージ</h2>
           <table style="border-collapse: collapse; width: 100%; max-width: 600px;">
+            <tr>
+              <td style="padding: 8px; border: 1px solid #ddd; background-color: #f5f5f5; font-weight: bold;">お名前</td>
+              <td style="padding: 8px; border: 1px solid #ddd;">${input.customerName}</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px; border: 1px solid #ddd; background-color: #f5f5f5; font-weight: bold;">メールアドレス</td>
+              <td style="padding: 8px; border: 1px solid #ddd;">${input.customerEmail}</td>
+            </tr>
             <tr>
               <td style="padding: 8px; border: 1px solid #ddd; background-color: #f5f5f5; font-weight: bold;">車種</td>
               <td style="padding: 8px; border: 1px solid #ddd;">${input.carModel}</td>
@@ -86,6 +96,8 @@ export const contactRouter = router({
         const emailText = `
 お問い合わせフォームからの新規メッセージ
 
+お名前: ${input.customerName}
+メールアドレス: ${input.customerEmail}
 車種: ${input.carModel}
 ${input.carYear ? `年式: ${input.carYear}` : ''}
 ${input.carType ? `型式: ${input.carType}` : ''}
@@ -101,7 +113,8 @@ ${uploadedPhotos.map(photo => `- ${photo.filename}: ${photo.url}`).join('\n')}
         // Send email
         const success = await sendEmail({
           to: 'contact@usdm.co.jp',
-          subject: `【お問い合わせ】${input.carModel} - ${input.partName}`,
+          replyTo: input.customerEmail,
+          subject: `【お問い合わせ】${input.customerName}様 - ${input.carModel} - ${input.partName}`,
           text: emailText,
           html: emailHtml,
         });

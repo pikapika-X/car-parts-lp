@@ -528,6 +528,17 @@ export default function Home() {
                     <CardContent className="p-6 md:p-8 space-y-6">
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div className="space-y-2">
+                          <Label htmlFor="customer-name">お名前 <span className="text-destructive">*</span></Label>
+                          <Input id="customer-name" placeholder="例:山田太郎" className="bg-background/50" {...register('customerName', { required: true })} />
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="customer-email">メールアドレス <span className="text-destructive">*</span></Label>
+                          <Input id="customer-email" type="email" placeholder="例:yamada@example.com" className="bg-background/50" {...register('customerEmail', { required: true })} />
+                        </div>
+                      </div>
+
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div className="space-y-2">
                           <Label htmlFor="car-model">車種 <span className="text-destructive">*</span></Label>
                           <Input id="car-model" placeholder="例:日産 スカイライン GT-R" className="bg-background/50" {...register('carModel', { required: true })} />
                         </div>
@@ -622,6 +633,8 @@ export default function Home() {
                         onClick={handleSubmit(async (data) => {
                           try {
                             await contactMutation.mutateAsync({
+                              customerName: data.customerName,
+                              customerEmail: data.customerEmail,
                               carModel: data.carModel,
                               carYear: data.carYear,
                               carType: data.carType,
