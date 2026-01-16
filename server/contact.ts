@@ -123,53 +123,7 @@ ${uploadedPhotos.map(photo => `- ${photo.filename}: ${photo.url}`).join('\n')}
           throw new Error('Failed to send admin email');
         }
 
-        // Send auto-reply email to customer
-        const contactDetails = `
-お名前: ${input.customerName}
-メールアドレス: ${input.customerEmail}
-車種: ${input.carModel}
-${input.carYear ? `年式: ${input.carYear}` : ''}
-${input.carType ? `型式: ${input.carType}` : ''}
-パーツ名: ${input.partName}
-${input.message ? `詳細・備考: ${input.message}` : ''}
-        `.trim();
-
-        const autoReplyHtml = `
-          <p>${input.customerName}様</p>
-          <p>お問い合わせを受け付けました。</p>
-          <p>2営業日以内に返信をいたします。今しばらくお待ちくださいませ。</p>
-          <p style="margin-top: 20px; font-weight: bold;">Us Custom Parts Shop USDM</p>
-          <hr style="margin: 30px 0; border: none; border-top: 1px solid #ddd;">
-          <p style="font-size: 12px; color: #666; margin-top: 20px;"><strong>以下問い合わせ内容の文字のみを参考添付</strong></p>
-          <pre style="background-color: #f5f5f5; padding: 10px; border-radius: 4px; font-size: 12px; color: #333; white-space: pre-wrap; word-wrap: break-word;">${contactDetails}</pre>
-        `;
-
-        const autoReplyText = `
-${input.customerName}様
-
-お問い合わせを受け付けました。
-
-2営業日以内に返信をいたします。今しばらくお待ちくださいませ。
-
-Us Custom Parts Shop USDM
-
----
-以下問い合わせ内容の文字のみを参考添付
-
-${contactDetails}
-        `;
-
-        const autoReplySuccess = await sendEmail({
-          to: input.customerEmail,
-          from: 'contact@usdm.co.jp',
-          subject: '【Us Custom Parts Shop USDM】お問い合わせを受け付けました',
-          text: autoReplyText,
-          html: autoReplyHtml,
-        });
-
-        if (!autoReplySuccess) {
-          console.warn('[Contact] Failed to send auto-reply email to customer');
-        }
+        // Auto-reply email to customer is disabled
 
         return {
           success: true,

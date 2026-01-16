@@ -5,6 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Check, ChevronRight, ExternalLink, Globe, Mail, MessageCircle, Package, Phone, Search, ShieldCheck, Truck, Wrench, Upload, X } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -16,7 +17,8 @@ export default function Home() {
   let { user, loading, error, isAuthenticated, logout } = useAuth();
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [uploadedPhotos, setUploadedPhotos] = useState<Array<{ filename: string; data: string; contentType: string; preview: string }>>([]);
+  const [uploadedPhotos, setUploadedPhotos] = useState<Array<{ filename: string; data: string; contentType: string; preview: string }>>([])
+  const [showSuccessDialog, setShowSuccessDialog] = useState(false);
   const { register, handleSubmit, formState: { errors }, reset } = useForm();
   const contactMutation = trpc.contact.submit.useMutation();
 
@@ -48,7 +50,7 @@ export default function Home() {
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <Wrench className="h-6 w-6 text-primary" />
-            <span className="font-heading font-bold text-xl tracking-wider">GLOBAL PARTS IMPORT</span>
+            <span className="font-heading font-bold text-xl tracking-wider">Us Custom Parts Shop USDM</span>
           </div>
           
           {/* Desktop Nav */}
@@ -653,7 +655,7 @@ export default function Home() {
                               message: data.message,
                               photos: uploadedPhotos,
                             });
-                            toast.success('お問い合わせを受け付けました。担当者より折り返しご連絡いたします。');
+                            setShowSuccessDialog(true);
                             reset();
                             setUploadedPhotos([]);
                           } catch (error: any) {
@@ -772,7 +774,7 @@ export default function Home() {
               <div>
                 <div className="flex items-center gap-2 mb-4">
                   <Wrench className="h-5 w-5 text-primary" />
-                  <span className="font-heading font-bold text-xl tracking-wider">GLOBAL PARTS IMPORT</span>
+                  <span className="font-heading font-bold text-xl tracking-wider">Us Custom Parts Shop USDM</span>
                 </div>
                 <p className="text-gray-400 text-sm leading-relaxed max-w-md">
                   当社は海外カーパーツの輸入・販売を専門に行う事業者です。
@@ -787,12 +789,47 @@ export default function Home() {
                   </a>
                 </div>
                 <div className="text-gray-500 text-sm">
-                  &copy; {new Date().getFullYear()} Global Parts Import. All rights reserved.
+                  &copy; {new Date().getFullYear()} Us Custom Parts Shop USDM. All rights reserved.
                 </div>
               </div>
             </div>
           </div>
         </footer>
+
+        {/* Success Dialog */}
+        <Dialog open={showSuccessDialog} onOpenChange={setShowSuccessDialog}>
+          <DialogContent className="max-w-md border-primary/30 bg-card/95 backdrop-blur-sm shadow-2xl">
+            <DialogHeader>
+              <DialogTitle className="text-center text-2xl font-bold text-primary">✓ お問い合わせを受け付けました</DialogTitle>
+            </DialogHeader>
+            <div className="space-y-6 py-6 text-center">
+              <div className="flex justify-center">
+                <div className="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center">
+                  <Check className="w-8 h-8 text-primary" />
+                </div>
+              </div>
+              <div className="space-y-4">
+                <p className="text-lg font-semibold text-foreground">
+                  ご問い合わせありがとうございます。
+                </p>
+                <p className="text-base text-muted-foreground leading-relaxed">
+                  2営業日以内に担当者より返信します。
+                </p>
+                <p className="text-sm text-muted-foreground">
+                  今しばらくお待ちくださいませ。
+                </p>
+              </div>
+              <div className="pt-4">
+                <Button
+                  onClick={() => setShowSuccessDialog(false)}
+                  className="w-full bg-primary hover:bg-primary/90 text-lg font-bold py-6"
+                >
+                  閉じる
+                </Button>
+              </div>
+            </div>
+          </DialogContent>
+        </Dialog>
       </main>
     </div>
   );
